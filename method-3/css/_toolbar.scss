@@ -1,0 +1,123 @@
+$toolbar-width: 52px;
+.toolbar{
+	position: fixed;
+	bottom: 50px;
+	left: 50%;
+	margin-left: -$toolbar-width / 2;
+}
+.toolbar-item{
+	position: relative;
+	display: block;
+	width: $toolbar-width;
+	height: $toolbar-width;	
+	margin-top: 1px;
+
+	&:hover{
+		.toolbar-btn{
+			&:before{
+				top: -$toolbar-width;
+			}
+			&:after{
+				top: 0;
+			}
+		}
+		&:after{
+			@include opacity(1);
+			@include scale(1);
+		}
+	}
+
+	&:after{
+		content: "";
+		position: absolute;
+		right: $toolbar-width - 6;
+		bottom: -10px;
+		width: 172px;
+		background-image: url(../images/toolbar.png);
+		background-repeat: no-repeat;
+		@include opacity(0);
+		@include transform-origin(95% 95%);
+		@include scale(0.01);
+		@include transition(all .5s);
+	}
+}
+.toolbar-item-weixin{
+	&:after{
+		content: "";
+		height: 212px;
+		background-position: 0 0;
+	}
+
+	.toolbar-btn{
+		@extend .icon-wechat;
+		&:after{
+			content: "公众\A账号";
+		}
+	}
+}
+.toolbar-item-feedback{
+	.toolbar-btn{
+		@extend .icon-pencil;
+		&:after{
+			content: "意见\A反馈";
+		}
+	}
+}
+.toolbar-item-app{
+	&:after{
+		content: "";
+		height: 194px;
+		background-position: 0 -222px;
+	}
+
+	.toolbar-btn{
+		@extend .icon-mobile;
+		&:after{
+			content: "APP\A下载";
+		}
+	}
+}
+.toolbar-item-top{
+	.toolbar-btn{
+		@extend .icon-arrow-up2;
+		&:after{
+			content: "返回\A顶部";
+		}
+	}
+}
+.toolbar-btn{
+	&, &:before, &:after{
+		position: absolute;
+		left: 0;
+		width: $toolbar-width;
+		height: $toolbar-width;
+	}
+	
+	&:before, &:after{
+		content: "";
+		color: #fff;
+		text-align: center;
+		@include transition(top .5s);
+	}
+
+	top: 0;
+	overflow: hidden;
+
+	@extend [class^="icon-"];
+
+	&:before{		
+		top: 0;
+		background-color: #d0d6d9;
+		font-size: 30px;
+		line-height: $toolbar-width;		
+	}
+
+	&:after{
+		top: $toolbar-width;
+		background-color: #98a1a6;
+		font-size: 12px;
+		line-height: 1.2;
+		white-space: pre;
+		padding-top: 12px;
+	}
+}
